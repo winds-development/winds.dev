@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WIND'S DEVELOPMENT</title>
+    <style>
+        /* Global & Reset Styles - Premium Light Theme (STC Style Inside) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #212529;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* --- 1. INTRO SCREEN --- */
+        #intro-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .logo-animation-box {
+            text-align: center;
+            animation: logoZoom 1.4s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .brand-image-circle {
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            border: 4px solid #fff;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .brand-image-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        @keyframes logoZoom {
+            0% { opacity: 0; transform: scale(0.5); }
+            70% { transform: scale(1.03); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* --- 2. ENTRY PORTAL FORM SCREEN (STC PREMIUM BLACK THEME) --- */
+        #form-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #080808 0%, #121212 100%);
+            display: none; 
+            justify-content: center;
+            align-items: center;
+            z-index: 9998;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .glass-card {
+            background: rgba(20, 20, 20, 0.85);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 24px;
+            padding: 45px;
+            width: 100%;
+            max-width: 460px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .glass-card h2 {
+            font-size: 28px;
+            margin-bottom: 8px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: #ffffff;
+        }
+
+        .glass-card p {
+            font-size: 14px;
+            margin-bottom: 30px;
+            color: #a0aec0;
+        }
+
+        .input-group {
+            margin-bottom: 22px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #cbd5e0;
+        }
+
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 14px 16px;
+            background: #1a1a1a;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            font-size: 16px;
+            color: #ffffff;
+            outline: none;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .input-group input:focus, .input-group select:focus {
+            border-color: #e62020;
+            box-shadow: 0 0 0 3px rgba(230, 32, 32, 0.25);
+            background: #222222;
+        }
+
+        /* Dropdown option customization for dark panel */
+        .input-group select option {
+            background: #141414;
+            color: #ffffff;
+        }
+
+        .enter-btn {
+            width: 100%;
+            background: #e62020;
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(230, 32, 32, 0.3);
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .enter-btn:hover {
+            background: #ff3333;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(230, 32, 32, 0.45);
+        }
+
+        /* --- 3. NAVIGATION HEADER --- */
+        header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            position: absolute; 
+            width: 100%;
+            top: 0;
+            z-index: 900;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo-text {
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #212529;
+            user-select: none;
+        }
+
+        .logo-text span.red-letter {
+            color: #e62020;
+        }
+
+        .dots-menu-btn {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+            width: 42px;
+            height: 42px;
+            border: 2px solid #212529;
+            border-radius: 10px;
+            cursor: pointer;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .dots-menu-btn:hover {
+            border-color: #e62020;
+            background-color: rgba(230, 32, 32, 0.05);
+        }
+
+        .dots-menu-btn span {
+            width: 5px;
+            height: 5px;
+            background-color: #212529;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+
+        .dots-menu-btn:hover span {
+            background-color: #e62020;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: none; 
+            flex-direction: column;
+            position: absolute;
+            top: 55px;
+            right: 0;
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 14px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            padding: 15px 0;
+            min-width: 200px;
+            z-index: 950;
+        }
+
+        .nav-links.show {
+            display: flex;
+        }
+
+        .nav-links li {
+            width: 100%;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #495057;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+            padding: 12px 25px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #e62020;
+            background-color: #f8f9fa;
+            padding-left: 30px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 220px 0 140px 0;
+            background: linear-gradient(135deg, #ffffff 0%, #f1f3f5 100%);
+            text-align: center;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .welcome-user {
+            background: rgba(230, 32, 32, 0.08);
+            color: #e62020;
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(230,32,32,0.15);
+        }
+
+        .hero h2 {
+            font-size: 48px;
+            color: #212529;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        .hero h2 span {
+            color: #e62020;
+        }
+
+        .slogan-tag {
+            font-size: 18px;
+            font-weight: 700;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 35px;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        section h2.sec-title {
+            text-align: center;
+            font-size: 38px;
+            color: #212529;
+            margin-bottom: 14px;
+            font-weight: 800;
+        }
+
+        section p.sec-subtitle {
+            text-align: center;
+            color: #6c757d;
+            margin-bottom: 65px;
+            font-size: 16px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- 4. SERVICES GRID --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: #ffffff;
+            padding: 45px 35px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: #e62020;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(230, 32, 32, 0.08);
+            border-color: rgba(230, 32, 32, 0.2);
+        }
+
+        .service-card h3 {
+            font-size: 22px;
+            color: #212529;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .service-card p {
+            color: #495057;
+            font-size: 15px;
+            line-height: 1.65;
+        }
+
+        /* --- 5. TECH MATRIX TABLE --- */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.03);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        .tech-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        .tech-table th, .tech-table td {
+            padding: 22px 26px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+            color: #212529;
+        }
+
+        .tech-table th {
+            background-color: #e62020;
+            color: white;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+
+        .tech-tag {
+            font-weight: 700;
+            color: #e62020;
+        }
+
+        /* --- 6. CURRENT PROJECTS SECTION --- */
+        .projects-display-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .project-display-card {
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+            transition: transform 0.3s;
+        }
+
+        .project-display-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(230, 32, 32, 0.2);
+        }
+
+        .project-display-card h3 {
+            font-size: 24px;
+            color: #212529;
+            margin-bottom: 15px;
+            font-weight: 800;
+            border-left: 4px solid #e62020;
+            padding-left: 12px;
+        }
+
+        .project-display-card p {
+            color: #495057;
+            font-size: 15.5px;
+            line-height: 1.7;
+        }
+
+        /* --- 7. DASHBOARDS GALLERY --- */
+        .dashboards-bg {
+            background-color: #f1f3f5;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 50px 30px;
+            margin-top: 40px;
+        }
+
+        .gallery-item {
+            background: #ffffff;
+            border-radius: 20px;
+            overflow: visible; 
+            box-shadow: 0 12px 35px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            position: relative;
+            margin-top: 50px; 
+            display: flex;
+            flex-direction: column;
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 50px;
+            background: linear-gradient(to bottom, #ccc, #aaa, #888);
+            z-index: 5;
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: -56px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 12px;
+            background: #e62020;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(230, 32, 32, 0.4);
+            z-index: 6;
+        }
+
+        .gallery-img-container {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            background: #f1f3f5;
+        }
+
+        .gallery-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        .scratch-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            cursor: pointer;
+            touch-action: none;
+        }
+
+        .gallery-caption {
+            padding: 22px 15px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #212529;
+            background: #ffffff;
+            border-top: 1px solid rgba(0, 0, 0, 0.02);
+            text-align: center;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            margin-top: auto;
+        }
+
+        /* --- FAQ --- */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            border-radius: 14px;
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 22px 28px;
+            font-weight: 700;
+            font-size: 17px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #212529;
+        }
+
+        .faq-answer {
+            padding: 0 28px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            color: #6c757d;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 22px 28px;
+            max-height: 220px;
+            border-top: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #ffffff;
+            color: #212529;
+            padding: 80px 0 35px 0;
+            border-top: 5px solid #e62020;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-about h3, .footer-hours h3 {
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .footer-about p, .footer-hours p {
+            color: #6c757d;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        .absolute-bottom-contact {
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            padding-top: 40px;
+            text-align: center;
+        }
+
+        /* Premium Social Media Vector Icons Wrap */
+        .social-icons-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            margin-top: 15px;
+        }
+
+        .social-icon-btn {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 55px;
+            height: 55px;
+            background: #f8f9fa;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .social-icon-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+            border-color: #e62020;
+        }
+
+        .social-icon-btn img {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
+        }
+
+        /* --- CHAT BOT WIDGET --- */
+        .chat-fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 65px;
+            height: 65px;
+            background: #e62020;
+            color: white;
+            border-radius: 50%;
+            display: none; 
+            justify-content: center;
+            align-items: center;
+            font-size: 32px;
+            font-weight: 900;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(230, 32, 32, 0.3);
+            z-index: 100005; 
+            animation: chatBounce 2s infinite;
+        }
+
+        @keyframes chatBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .chat-box {
+            position: fixed;
+            bottom: 110px;
+            right: 30px;
+            width: 360px;
+            height: 480px;
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.1);
+            display: none; 
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 100005; 
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .chat-header {
+            background: #e62020;
+            color: white;
+            padding: 18px 20px;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .msg {
+            max-width: 82%;
+            padding: 12px 16px;
+            border-radius: 16px;
+            font-size: 14.5px;
+        }
+
+        .msg.user {
+            background: #e62020;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 2px;
+            box-shadow: 0 2px 8px rgba(230, 32, 32, 0.15);
+        }
+
+        .msg.bot {
+            background: #ffffff;
+            color: #212529;
+            align-self: flex-start;
+            border-bottom-left-radius: 2px;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .chat-input-area {
+            padding: 14px;
+            background: #ffffff;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input-area input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid #ced4da;
+            background: #ffffff;
+            color: #212529;
+            border-radius: 12px;
+            outline: none;
+        }
+
+        .chat-input-area button {
+            background: #e62020;
+            color: white;
+            border: none;
+            padding: 0 18px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            .hero h2 { font-size: 34px; }
+            .chat-box { width: 88vw; right: 6vw; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. INTRO SCREEN -->
+    <div id="intro-screen">
+        <div class="logo-animation-box">
+            <div class="brand-image-circle">
+                <img src="https://i.postimg.cc/15vnshqN/Picsart-26-07-11-14-33-20-331.png" alt="Winds Logo">
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. ENTRY PORTAL FORM SCREEN (STC PREMIUM BLACK LAYOUT) -->
+    <div id="form-screen">
+        <div class="glass-card">
+            <h2>Welcome to WINDS</h2>
+            <p>Please enter details to open full features</p>
+            <form id="student-form" onsubmit="handleFormSubmit(event)">
+                <div class="input-group">
+                    <label>Name</label>
+                    <input type="text" id="student-name" placeholder="Enter Full Name" required>
+                </div>
+                <div class="input-group">
+                    <label>Age (Years)</label>
+                    <input type="number" id="student-age" placeholder="Enter Age" min="3" max="75" required>
+                </div>
+                <div class="input-group">
+                    <label>Where you got us ??</label>
+                    <select id="student-class" required>
+                        <option value="" disabled selected>Select Source</option>
+                        <option value="THROUGH A FRND">THROUGH A FRND</option>
+                        <option value="INSTAGRAM">INSTAGRAM</option>
+                        <option value="YOUTUBE">YOUTUBE</option>
+                        <option value="ADVERTISEMENTS">ADVERTISEMENTS</option>
+                    </select>
+                </div>
+                <button type="submit" class="enter-btn">Enter Website</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 3. MAIN NAVIGATION -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo-text">W<span class="red-letter">I</span>NDS</div>
+
+                <button class="dots-menu-btn" id="menuToggleBtn" onclick="toggleNavMenu(event)" title="Toggle Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <ul class="nav-links" id="navLinksDropdown">
+                    <li><a href="#home" class="active" onclick="closeNavMenu()">Home</a></li>
+                    <li><a href="#services" onclick="closeNavMenu()">Services</a></li>
+                    <li><a href="#matrix" onclick="closeNavMenu()">Tech Matrix</a></li>
+                    <li><a href="#projects" onclick="closeNavMenu()">Projects</a></li>
+                    <li><a href="#dashboards" onclick="closeNavMenu()">Dashboards</a></li>
+                    <li><a href="#faq" onclick="closeNavMenu()">FAQs</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTOR -->
+    <div id="home" class="hero">
+        <div class="container">
+            <div id="user-welcome-badge" class="welcome-user" style="display:none;"></div>
+            <h2>WIND'S <span>DEVELOPMENT</span> (2020)</h2>
+            <p class="slogan-tag">Applications • Games • Websites • 24/7 Hosting</p>
+            <p style="max-width: 780px; margin: 0 auto; color: #495057; line-height: 1.8; font-size: 17px;">
+                Welcome to Wind's Dev Studio. We design, optimize, and launch full-scale platforms, custom applications, and persistent systems running continuously on reliable enterprise network architecture.
+            </p>
+        </div>
+    </div>
+
+    <!-- 4. SERVICES SECTION -->
+    <section id="services">
+        <div class="container">
+            <h2 class="sec-title">Core Operational Services</h2>
+            <p class="sec-subtitle">Top-tier development cycles engineered for zero latency and flawless scalability.</p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Game Development</h3>
+                    <p>Advanced real-time server architecture, asset optimization, and interactive environment building for custom gaming frameworks.</p>
+                </div>
+                <div class="service-card">
+                    <h3>App & Web Engineering</h3>
+                    <p>Modern interactive application builds, clean interfaces, and robust systems custom tailored for high performance loops.</p>
+                </div>
+                <div class="service-card">
+                    <h3>24/7 Persistent Hosting</h3>
+                    <p>Robust cloud server distribution network ensuring zero packet drops and continuous uptime logs around the clock.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Bot Automation Systems</h3>
+                    <p>High-frequency automation configurations deploying script handlers, API structures, and asynchronous background tasks.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. TECH MATRIX TABLE -->
+    <section id="matrix">
+        <div class="container">
+            <h2 class="sec-title">Operational Tech Matrix</h2>
+            <p class="sec-subtitle">The powerful structural stacks behind our production pipelines and round-the-clock hosting operations.</p>
+            
+            <div class="table-responsive">
+                <table class="tech-table">
+                    <thead>
+                        <tr>
+                            <th>Platform Division</th>
+                            <th>Core Focus Architecture</th>
+                            <th>Technologies & Engines Deployed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="tech-tag">Game & App Engineering</td>
+                            <td>High Framerate & Real-time Synchronization</td>
+                            <td>Unity Engine, Custom Network Stacks, Flutter Mobile Build, WebSockets</td>
+                        </tr>
+                        <tr>
+                            <td class="tech-tag">24/7 Hosting Suite</td>
+                            <td>Zero Downtime Framework</td>
+                            <td>Dedicated Linux Clusters, AWS Architecture, Isolated Docker Containers</td>
+                        </tr>
+                        <tr>
+                            <td class="tech-tag">Bot Automations</td>
+                            <td>Asynchronous Query Management</td>
+                            <td>NodeJS Async Ecosystem, Discord.js / Telegram Core API, Python Engines</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. SPECIFIC PROJECTS SECTION -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="sec-title">Our Current Projects</h2>
+            <p class="sec-subtitle">Review our premium live active development assets currently driving systems.</p>
+            
+            <div class="projects-display-grid">
+                <div class="project-display-card">
+                    <h3>LIVE INDIA</h3>
+                    <p>This is a high-tier massive open-world game engineered with exceptional visual detailing, extensive map scaling, and a robust multiplayer network netcode synchronization framework built to deliver a perfectly smooth, fluid, and immersive dynamic gameplay experience.</p>
+                </div>
+                <div class="project-display-card">
+                    <h3>ZYRAX</h3>
+                    <p>This is a highly popular, intensely utilized Discord automation bot optimized specifically for high-capacity computational task handling. Due to its exceptional speed, performance optimization, and robust script handlers, it proudly ranks among the top 10 bots globally for executing seamless automated workflows.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. HANGING THREAD GALLERY (DASHBOARDS BLOCK) -->
+    <section id="dashboards" class="dashboards-bg">
+        <div class="container">
+            <h2 class="sec-title">Our System Dashboards</h2>
+            <p class="sec-subtitle">Drag your finger or wipe your mouse across the blocks below to scratch and reveal our production logs!</p>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <div class="gallery-img-container">
+                        <canvas class="scratch-canvas"></canvas>
+                        <img src="https://i.postimg.cc/sDZ0v0q8/Screenshot-20260711-175818-Gallery.jpg" alt="LIVE INDIA (1)">
+                    </div>
+                    <div class="gallery-caption">LIVE INDIA (1)</div>
+                </div>
+                
+                <div class="gallery-item">
+                    <div class="gallery-img-container">
+                        <canvas class="scratch-canvas"></canvas>
+                        <img src="https://i.postimg.cc/5NLdZ0xT/Screenshot-20260711-154217-Discord.jpg" alt="LIVE INDIA (2)">
+                    </div>
+                    <div class="gallery-caption">LIVE INDIA (2)</div>
+                </div>
+                
+                <div class="gallery-item">
+                    <div class="gallery-img-container">
+                        <canvas class="scratch-canvas"></canvas>
+                        <img src="https://i.postimg.cc/Px997G0P/Screenshot-20260711-175337-Discord.jpg" alt="ZYRAX SYSTEM V1">
+                    </div>
+                    <div class="gallery-caption">ZYRAX SYSTEM V1</div>
+                </div>
+                
+                <div class="gallery-item">
+                    <div class="gallery-img-container">
+                        <canvas class="scratch-canvas"></canvas>
+                        <img src="https://i.postimg.cc/7Z9ckJjK/Screenshot-20260711-154206-Discord.jpg" alt="HOST NODE">
+                    </div>
+                    <div class="gallery-caption">HOST NODE</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. FREQUENTLY ASKED QUESTIONS (EXPANDED TO 4 QUESTIONS) -->
+    <section id="faq">
+        <div class="container">
+            <h2 class="sec-title">Frequently Asked Questions</h2>
+            <p class="sec-subtitle">Common system queries reviewed frequently by onboarding clients.</p>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>How does the 24/7 hosting suite secure custom instances?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Every bot script and platform operates within isolated containerized node environments protected by continuous process monitoring guards.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>What protocols drive high scalability app environments?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        We deploy custom high-performance socket layers coupled with dynamic memory caches to handle thousands of active user connections simultaneously.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>How do we apply or request a custom automation module?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        You can drop a query directly via our Discord gateway or sync up with our team leads at the active development desk for instant setup documentation.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>What is the average runtime deployment window for new builds?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Standard builds go through rigorous containerized diagnostic cycles and are deployed fully onto production nodes within 24 to 48 hours.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. FOOTER SETUPS WITH OWNERSHIP AND CONTROLLERS -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <h3>WINDS DEVELOPMENT</h3>
+                    <p>The engineering house specializing in custom application systems, interactive games, modern websites, and non-stop 24/7 cloud hosting clusters.</p>
+                </div>
+                <div class="footer-hours">
+                    <h3>Studio Operational Info</h3>
+                    <p><strong>Ownzz by :</strong> Sadiq_Ahmed , Sheikh Hammad and Romeo.<br>
+                    <strong>Contact :</strong> @toni_lisman123 and @ghost_aura99<br>
+                    <strong>Development Desk:</strong> 24/7/365 Non-stop Active</p>
+                </div>
+            </div>
+            
+            <div class="absolute-bottom-contact">
+                <span>Connect With Winds Community Channels</span>
+                
+                <!-- Premium Hidden Link Vector Social Grid Setup -->
+                <div class="social-icons-wrapper">
+                    <!-- Instagram Redirect Link Wrapper -->
+                    <a href="https://www.instagram.com/winds.dev/" target="_blank" class="social-icon-btn" title="Winds Instagram Profile">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram Icon">
+                    </a>
+                    
+                    <!-- Discord Redirect Link Wrapper -->
+                    <a href="https://dsc.gg/zyrax" target="_blank" class="social-icon-btn" title="Winds Discord Gateway Server">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3670/3670157.png" alt="Discord Icon">
+                    </a>
+                </div>
+                
+                <p style="margin-top:30px; color:#6c757d; font-size:13px;">© 2020 - 2026 Winds Development Studio. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 10. CHAT BOT INTEGRATION -->
+    <div class="chat-fab" id="chatBubble" onclick="toggleChatBox()">?</div>
+    
+    <div id="stc-chat-box" class="chat-box">
+        <div class="chat-header">
+            <div>Winds Assistant</div>
+            <div style="cursor:pointer;" onclick="toggleChatBox()">×</div>
+        </div>
+        <div id="chat-messages" class="chat-messages">
+            <div class="msg bot">Hello! I am the automated system interface. Ask me about our project architectures, support crew pipelines, or 24/7 hosting environments!</div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chat-user-input" placeholder="Type a message..." onkeypress="handleChatEnter(event)">
+            <button onclick="sendChatMessage()">Send</button>
+        </div>
+    </div>
+
+    <!-- MAIN ENGINE CONTROLLER SCRIPT -->
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const intro = document.getElementById('intro-screen');
+                intro.style.opacity = '0';
+                intro.style.transform = 'translateY(-100vh)';
+                
+                const fScreen = document.getElementById('form-screen');
+                fScreen.style.display = 'flex';
+                setTimeout(() => fScreen.style.opacity = '1', 50);
+            }, 2600);
+        });
+
+        function toggleNavMenu(event) {
+            event.stopPropagation();
+            const dropdown = document.getElementById('navLinksDropdown');
+            dropdown.classList.toggle('show');
+        }
+
+        function closeNavMenu() {
+            const dropdown = document.getElementById('navLinksDropdown');
+            dropdown.classList.remove('show');
+        }
+
+        window.addEventListener('click', (e) => {
+            const dropdown = document.getElementById('navLinksDropdown');
+            const btn = document.getElementById('menuToggleBtn');
+            if (dropdown && dropdown.classList.contains('show') && !dropdown.contains(e.target) && !btn.contains(e.target)) {
+                dropdown.classList.remove('show');
+            }
+        });
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const sName = document.getElementById('student-name').value;
+            const sClass = document.getElementById('student-class').value;
+            
+            const badge = document.getElementById('user-welcome-badge');
+            badge.innerText = `👋 Welcome, ${sName} | Source: ${sClass}`;
+            badge.style.display = 'inline-block';
+            
+            const fScreen = document.getElementById('form-screen');
+            fScreen.style.opacity = '0';
+            setTimeout(() => {
+                fScreen.style.display = 'none';
+                window.scrollTo({ top: 0, behavior: 'instant' });
+                document.getElementById('chatBubble').style.display = 'flex';
+                setupScratchCards();
+            }, 500);
+        }
+
+        function setupScratchCards() {
+            const canvases = document.querySelectorAll('.scratch-canvas');
+            canvases.forEach(canvas => {
+                const ctx = canvas.getContext('2d');
+                const box = canvas.parentElement;
+                
+                canvas.width = box.clientWidth;
+                canvas.height = box.clientHeight;
+                
+                ctx.fillStyle = '#121212';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                ctx.fillStyle = '#b3b3b3';
+                ctx.font = 'bold 15px "Segoe UI", sans-serif';
+                ctx.textBaseline = 'middle';
+                ctx.textAlign = 'center';
+                ctx.fillText('Scratch Dashboard Here 👆', canvas.width / 2, canvas.height / 2);
+                
+                let active = false;
+                
+                function clearLayer(e) {
+                    if (!active) return;
+                    const boundary = canvas.getBoundingClientRect();
+                    const pointerX = e.touches ? e.touches[0].clientX : e.clientX;
+                    const pointerY = e.touches ? e.touches[0].clientY : e.clientY;
+                    
+                    const localX = pointerX - boundary.left;
+                    const localY = pointerY - boundary.top;
+                    
+                    ctx.globalCompositeOperation = 'destination-out';
+                    ctx.beginPath();
+                    ctx.arc(localX, localY, 35, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                
+                canvas.addEventListener('mousedown', (e) => { active = true; clearLayer(e); });
+                canvas.addEventListener('mousemove', clearLayer);
+                window.addEventListener('mouseup', () => active = false);
+                
+                canvas.addEventListener('touchstart', (e) => { active = true; clearLayer(e); });
+                canvas.addEventListener('touchmove', clearLayer);
+                window.addEventListener('touchend', () => active = false);
+            });
+        }
+
+        window.addEventListener('resize', () => {
+            if(document.getElementById('form-screen').style.display === 'none') {
+                setupScratchCards();
+            }
+        });
+
+        function toggleFaq(el) {
+            el.parentElement.classList.toggle('active');
+        }
+
+        function toggleChatBox() {
+            const box = document.getElementById('stc-chat-box');
+            box.style.display = (box.style.display === 'none' || box.style.display === '') ? 'flex' : 'none';
+        }
+
+        function handleChatEnter(e) {
+            if (e.key === 'Enter') sendChatMessage();
+        }
+
+        function sendChatMessage() {
+            const field = document.getElementById('chat-user-input');
+            const txt = field.value.trim();
+            if(!txt) return;
+
+            appendMsg(txt, 'user');
+            field.value = '';
+
+            setTimeout(() => {
+                let ans = 'Sorry, if you have any question related to winds you can feel free to ask but we didn’t reply "off-topic" questions.';
+                const low = txt.toLowerCase();
+
+                if (low.match(/^(hi|hello|hey|hyy|greetings|good morning|good afternoon|heyy)$/)) {
+                    ans = "Hello there! Systems are fully operational. How can I help you today with Winds Development?";
+                }
+                else if (low.includes('game') || low.includes('live india') || low.includes('play')) {
+                    ans = "Our flagship project is LIVE INDIA. It is a premium open-world game engineered with intense visual fidelity, heavy-duty multiplayer networking synchronization (netcode), fluid asset processing loops, and full map scaling configuration layouts designed for lag-free performance.";
+                }
+                else if (low.includes('bot') || low.includes('zyrax')) {
+                    ans = "We have engineered ZYRAX, a top-tier global automation system optimized heavily for discord infrastructure workflows. It runs high-frequency asynchronous script blocks and custom API query layers ranking it inside the top 10 performance platforms globally.";
+                }
+                else if (low.includes('app') || low.includes('application')) {
+                    ans = "OUR APP DIDN'T LAUNCH YET BUT WE WILL LAUNCH IT SOON ASAP.";
+                }
+                else if (low.includes('owner') || low.includes('founder') || low.includes('boss') || low.includes('create')) {
+                    ans = "SADIQ AHMED, SHEIKH HAMMAD AND ROMEO are the owners of Winds.";
+                }
+                else if (low.includes('buy') || low.includes('sell') || low.includes('purchase') || low.includes('meet') || low.includes('deal') || low.includes('contact')) {
+                    ans = "YOU CAN CONTACT THEM VIA DISCORD AT - @toni_lisman123";
+                }
+                else if (low.includes('host') || low.includes('server') || low.includes('vps') || low.includes('hosting')) {
+                    ans = "We provide lifetime host with low downtime, high isolated processing container stacks, enterprise protection wrappers, and continuous process monitoring layouts.";
+                }
+
+                appendMsg(ans, 'bot');
+            }, 550);
+        }
+
+        function appendMsg(t, s) {
+            const holder = document.getElementById('chat-messages');
+            const node = document.createElement('div');
+            node.classList.add('msg', s);
+            node.innerText = t;
+            holder.appendChild(node);
+            holder.scrollTop = holder.scrollHeight;
+        }
+    </script>
+</body>
+</html>
